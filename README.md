@@ -5,8 +5,8 @@ Cocaine use disorder (CUD) is a substance use disorder (SUD) characterized by co
 
 ## Links
 
-[Preprint](https://www.medrxiv.org/content/10.1101/2021.09.03.21263048v1)
-[MRI data](https://openneuro.org/datasets/ds003346)
+[Preprint](https://www.medrxiv.org/content/10.1101/2021.09.03.21263048v1)  
+[MRI data](https://openneuro.org/datasets/ds003346)  
 [Clinical and cognitive measures](http://doi.org/10.5281/zenodo.5123331)
 
 ## Description
@@ -16,7 +16,25 @@ Code for extracting and ploting QC values for SUDMEX CONN: The Mexican MRI datas
 
 ### Cortical thickness & volume
 
+```
+recon-all \
+  -s  <subject id that you make up> \
+  -sd <directory to put the subject folder in> \
+  -all
+```
+
 ### MRIQC
+
+```
+singularity run -B /mnt:/mnt \
+    $container \
+    $path_input \
+    $path_output/mriqc \
+    participant \
+    --fd_thres 0.5 \
+    --work-dir $path_output/tmp \
+    --participant-label $sub
+```
 
 ## Figures 
 
@@ -26,8 +44,15 @@ Loading and plotting thickness and graphs:
 Rscript plot_thick_vol.R
 ```
 
+![intro](Fig1.png)
+
 Loading and plotting BOLD, T1w and diffusion imaging parameters:
 
 ```
 Rscript plot_sudmex_conn.R
 ```
+
+![intro](Fig2.png)
+
+
+![intro](Fig3.png)
